@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class StoreModel {
 	
 	//Primary Key
-	private String storeId;
+	private long storeId;
 	private String storeName;
 	private String storeContact;
 	private String storeAddress1;
@@ -14,11 +14,25 @@ public class StoreModel {
 	private String city;
 	private String zip;
 	
+	public StoreModel(){
+	}
 	
-	public String getStoreId() {
+	public StoreModel(long storeId, String storeName, String storeContact, String storeAddress1, String storeAddress2,
+			String city, String zip) {
+		this();
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storeContact = storeContact;
+		this.storeAddress1 = storeAddress1;
+		this.storeAddress2 = storeAddress2;
+		this.city = city;
+		this.zip = zip;
+	}
+	
+	public long getStoreId() {
 		return storeId;
 	}
-	public void setStoreId(String storeId) {
+	public void setStoreId(long storeId) {
 		this.storeId = storeId;
 	}
 	public String getStoreName() {
