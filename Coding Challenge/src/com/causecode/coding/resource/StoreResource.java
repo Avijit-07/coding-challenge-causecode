@@ -1,5 +1,6 @@
 package com.causecode.coding.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -15,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.causecode.coding.model.DBModel;
 import com.causecode.coding.model.StoreModel;
 import com.causecode.coding.service.StoreService;
 
@@ -29,10 +29,15 @@ public class StoreResource {
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		public List<StoreModel> getStore(@QueryParam("zip") String zip){
+			List<StoreModel> storeList = new ArrayList<>();
 			if(null != zip)
-				return storeService.getAllStores(zip);
+				storeList =storeService.getAllStores(zip);
 			else
-				return storeService.getAllStores(null);
+				storeList = storeService.getAllStores(null);
+			/*for (StoreModel storeModel : storeList) {
+				System.out.println("Store name: "+storeModel.getStoreName());
+			}*/
+			return storeList;
 		}
 		
 		//Create a Store

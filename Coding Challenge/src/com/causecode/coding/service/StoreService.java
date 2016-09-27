@@ -15,35 +15,21 @@ public class StoreService {
 	DatabaseAccessor dbAccessor = new DatabaseAccessor();
 	
 	public StoreService() {
-		stores.put(1L, new StoreModel(1, "Store","12345678","Wakad","","Pune","411057"));
-		stores.put(2L, new StoreModel(2, "Kolkata Store","1234321","Behala","","Kolkata","154512"));
 	}
 	
 	//Fetching All stores
 	public List<StoreModel> getAllStores(String zip){
-		StoreModel storeModel = new StoreModel();
 		List<StoreModel> storeList = new ArrayList<>();
 		List<DBModel> listOfStores = dbAccessor.getStores();
 		if(listOfStores.size() > 0){
 			for (DBModel dbModel : listOfStores) {
-				//System.out.println("Store name "+dbModel.getStoreName());
+				StoreModel storeModel = new StoreModel();
 				storeModel.setStoreId(dbModel.getStoreId());
 				storeModel.setStoreName(dbModel.getStoreName());
-				storeModel.setCity(dbModel.getCity());;
+				storeModel.setCity(dbModel.getCity());
 				storeList.add(storeModel);
 			}
 		}
-		
-		/*if(null != zip){
-			for (Long key : stores.keySet()) {
-				storeModel = (StoreModel)stores.get(key);
-				if(zip.equalsIgnoreCase(storeModel.getZip()))
-						storeList.add(storeModel);
-			}
-		}
-		else{
-			storeList.addAll(stores.values());
-		}*/
 		return storeList;
 	}
 	
@@ -54,8 +40,12 @@ public class StoreService {
 	
 	//Creating a Store
 	public StoreModel addStore(StoreModel storeModel){
-		storeModel.setStoreId(stores.size() + 1 );
-		stores.put(storeModel.getStoreId(), storeModel);
+		DBModel dbModel = new DBModel();
+		dbModel.setStoreId((int)storeModel.getStoreId());
+		dbModel.setStoreName(storeModel.getStoreName());
+		dbModel.setCity(storeModel.getCity());
+		dbModel.setZip(Long.parseLong(storeModel.getZip()));
+		dbAccessor.addStore(dbModel);
 		return storeModel;
 	}
 	
