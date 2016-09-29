@@ -6,9 +6,13 @@ import org.hibernate.Session;
 
 import com.causecode.coding.model.DBModel;
 
-public class DatabaseManager {
+public interface DatabaseManager {
 	
-	public List<DBModel> getStores(Session session){return null;}
+	List<DBModel> getStores();
 	
-	public void addStore(Session session, DBModel dbModel){}
+	int addStore(DBModel dbModel);
+	
+	DBModel updateStore(int storeId, DBModel dbModel);
+	
+	void deleteStore(int storeId);
 }

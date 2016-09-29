@@ -11,9 +11,8 @@ import com.causecode.coding.daoImpl.DatabaseManager;
 import com.causecode.coding.model.DBModel;
 import com.causecode.coding.util.HibernateUtil;
 
-public class DatabaseAccessor {
+public class DatabaseAccessor implements DatabaseManager {
 
-	DatabaseManager dbManager = new DatabaseManager();
 	Session session = null;
 	Transaction transaction = null;
 	
