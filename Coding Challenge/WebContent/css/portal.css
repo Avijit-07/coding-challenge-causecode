@@ -1,0 +1,25 @@
+/**
+	@Description: Application style sheet
+*/
+.header
+{
+	height: 60px;
+	background-color: #333;
+}
+.wrapper form{
+	padding-top: 7px;
+}
+
+.wrapper font
+{
+	padding-top: 7px;
+}
+
+.body
+{
+	padding-top: 15px;
+}
+
+/* #storeId{
+	width: 170px !important;
+} */

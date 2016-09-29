@@ -33,29 +33,36 @@ public class StoreService {
 		return storeList;
 	}
 	
-	//Fetching specific store based on the ZIP code
-	public List<StoreModel> getNearbyStore(String zip){
-		return null;
-	}
 	
 	//Creating a Store
-	public StoreModel addStore(StoreModel storeModel){
+	public int addStore(StoreModel storeModel){
 		DBModel dbModel = new DBModel();
 		dbModel.setStoreId((int)storeModel.getStoreId());
 		dbModel.setStoreName(storeModel.getStoreName());
 		dbModel.setCity(storeModel.getCity());
 		dbModel.setZip(Long.parseLong(storeModel.getZip()));
-		dbAccessor.addStore(dbModel);
-		return storeModel;
+		int storeId = dbAccessor.addStore(dbModel);
+		return storeId;
 	}
 	
 	//Updating a Store detail
-	public StoreModel updateStore(StoreModel storeModel){
+	public StoreModel updateStore(long storeId, StoreModel storeModel){
 		if(storeModel.getStoreId() == 0){
 			return null;
 		}
 		else{
-			stores.put(storeModel.getStoreId(), storeModel);
+			DBModel dbModel = new DBModel();
+			dbModel.setStoreId((int)storeModel.getStoreId());
+			dbModel.setStoreName(storeModel.getStoreName());
+			dbModel.setCity(storeModel.getCity());
+			dbModel.setZip(Long.parseLong(storeModel.getZip()));
+			System.out.println("Store value before updating "+storeModel.getStoreName());
+			dbModel = dbAccessor.updateStore(dbModel.getStoreId(), dbModel);
+			storeModel.setStoreId(dbModel.getStoreId());
+			storeModel.setStoreName(dbModel.getStoreName());
+			storeModel.setCity(dbModel.getCity());
+			storeModel.setZip(String.valueOf(dbModel.getZip()));
+			System.out.println("Store value after updating "+storeModel.getStoreName());
 		}
 		return storeModel;
 	}

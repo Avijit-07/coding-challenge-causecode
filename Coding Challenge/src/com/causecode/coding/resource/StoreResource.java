@@ -34,9 +34,6 @@ public class StoreResource {
 				storeList =storeService.getAllStores(zip);
 			else
 				storeList = storeService.getAllStores(null);
-			/*for (StoreModel storeModel : storeList) {
-				System.out.println("Store name: "+storeModel.getStoreName());
-			}*/
 			return storeList;
 		}
 		
@@ -46,8 +43,9 @@ public class StoreResource {
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 		public Response createStore(StoreModel storeModel){
+			int storeId = storeService.addStore(storeModel);
 			return Response.status(Status.CREATED)
-					.entity(storeService.addStore(storeModel))
+					.entity("Created new Store with store ID "+storeId)
 					.build();
 		}
 		
@@ -57,8 +55,7 @@ public class StoreResource {
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 		public StoreModel updateStore(@PathParam("storeId") long storeId, StoreModel storeModel){
-			storeModel.setStoreId(storeId);
-			return storeService.updateStore(storeModel);
+			return storeService.updateStore(storeId, storeModel);
 		}
 		
 		//Delete a Store

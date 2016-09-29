@@ -36,11 +36,12 @@ public class DatabaseAccessor {
 		return listOfStores;
 	}
 	
-	public void addStore(DBModel dbModel){
+	public int addStore(DBModel dbModel){
 		session = HibernateUtil.getSessionFactory().openSession();
+		int storeId = 0;
 		try{
 			transaction = session.beginTransaction();
-			session.save(dbModel);
+			storeId = (int) session.save(dbModel);
 			transaction.commit();
 		}
 		catch (Exception e) {
@@ -50,5 +51,26 @@ public class DatabaseAccessor {
 		finally {
 			session.close();
 		}
+		return storeId;
+	}
+	
+	public DBModel updateStore(int storeId, DBModel dbModel){
+		session = HibernateUtil.getSessionFactory().openSession();
+		try{
+			transaction = session.beginTransaction();
+			DBModel oldDBmodel = (DBModel)session.get(DBModel.class, storeId);
+			oldDBmodel.setStoreName(dbModel.getStoreName());
+			oldDBmodel.setCity(dbModel.getCity());
+			oldDBmodel.setZip(dbModel.getZip());
+			transaction.commit();
+		}
+		catch (Exception e) {
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return null;
 	}
 }

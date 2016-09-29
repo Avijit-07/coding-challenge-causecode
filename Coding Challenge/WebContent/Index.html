@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Store Management</title>
+
+<!-- JQuery Library -->
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+
+<!-- Bootstrap Library -->
+<script type="text/javascript" src="./js/bootstrap.js"></script>
+<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="./css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
+<!-- Loading Stylesheet -->
+<link href="./css/portal.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<script src="./js/common.js"></script>
+<div class="container body" style="background-color: #FBB900" >
+<div id="div1" class="text-center" style="height: 100px;">
+	<div id="div1a" style="height: 50px;">
+		<font style=" font-family: Tahoma, Time New Roman; font-size: 32px; color: #0A0BC0">Store Management Portal</font>
+	</div>
+	<div id="div1b" >
+		<button id="buttonCREATE" onclick="javascript:onAdd();" class="btn-default">CREATE</button>
+		<button id="buttonUPDATE" onclick="javascript:onChange();" class="btn-default">UPDATE</button>
+		<button id="buttonDELETE" onclick="javascript:onRemove();" class="btn-default">DELETE</button>
+	</div>
+</div>
+
+<div id="div2" class="text-center" style="height: 225px;"> <!-- margin-left: 480px; -->
+
+		<div id="div2a" hidden="true" class="col-lg-offset-5" > <!--style="margin-top: 15px"  -->
+			<table>
+				<tr>
+					<td>
+						<input type="text" id="storeId" maxlength="6" required="required" placeholder="Store ID" class="form-control" 
+						onblur="javascript:checkA();" >
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="div2b" hidden="true" class="col-lg-offset-5" > <!-- style=" position:relative; margin-top: 0px" -->
+		<table>
+			<tr>
+				<td>
+					<input type="text" id="storeName" maxlength="30" required="required" placeholder="Store Name" class="form-control" 
+					onblur="javascript:checkB();" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" id="storeAddress1" maxlength="30" required="required" placeholder="Address Line 1" class="form-control" 
+					onblur="javascript:checkB();" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" id="storeAddress2" maxlength="30" placeholder="Address Line 2" class="form-control" 
+					onblur="javascript:checkB();" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" id="storeCity" maxlength="30" required="required" placeholder="City" class="form-control" 
+					onblur="javascript:checkB();" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" id="storeZip" maxlength="6" required="required" placeholder="ZipCode" class="form-control" 
+					onblur="javascript:checkB();" >
+				</td>
+			</tr>
+		</table>
+		</div>
+		
+</div>
+
+<div id="div3"  class="text-center">
+		<button id="buttonADD" onclick="javascript:onCreate();" hidden="true" class="btn-primary" disabled="disabled" >Create this store</button>
+		<button id="buttonCHANGE" onclick="javascript:onUpdate();" hidden="true" class="btn-primary" disabled="disabled" >Update store details</button>
+		<button id="buttonREMOVE" onclick="javascript:onDelete();" hidden="true" class="btn-primary" >Delete this store</button>
+</div>
+</div>
+</body>
+</html>

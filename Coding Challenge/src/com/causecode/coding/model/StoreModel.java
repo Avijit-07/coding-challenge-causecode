@@ -13,8 +13,7 @@ public class StoreModel {
 	public StoreModel(){
 	}
 	
-	public StoreModel(long storeId, String storeName, String storeContact, String storeAddress1, String storeAddress2,
-			String city, String zip) {
+	public StoreModel(long storeId, String storeName, String city, String zip) {
 		this();
 		this.storeId = storeId;
 		this.storeName = storeName;
