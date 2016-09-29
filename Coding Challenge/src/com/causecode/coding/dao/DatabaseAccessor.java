@@ -1,9 +1,9 @@
 package com.causecode.coding.dao;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -56,9 +56,10 @@ public class DatabaseAccessor {
 	
 	public DBModel updateStore(int storeId, DBModel dbModel){
 		session = HibernateUtil.getSessionFactory().openSession();
+		DBModel oldDBmodel = null;
 		try{
 			transaction = session.beginTransaction();
-			DBModel oldDBmodel = (DBModel)session.get(DBModel.class, storeId);
+			oldDBmodel = (DBModel)session.get(DBModel.class, storeId);
 			oldDBmodel.setStoreName(dbModel.getStoreName());
 			oldDBmodel.setCity(dbModel.getCity());
 			oldDBmodel.setZip(dbModel.getZip());
@@ -71,6 +72,23 @@ public class DatabaseAccessor {
 		finally {
 			session.close();
 		}
-		return null;
+		return oldDBmodel;
+	}
+	
+	public void deleteStore(int storeId){
+		session = HibernateUtil.getSessionFactory().openSession();
+		try{
+			transaction = session.beginTransaction();
+			DBModel storeDetail = (DBModel) session.get(DBModel.class, storeId);
+			session.delete(storeDetail);
+			transaction.commit();
+		}
+		catch (HibernateException he) {
+			transaction.rollback();
+			he.printStackTrace();
+		}
+		finally{
+			session.close();
+		}
 	}
 }

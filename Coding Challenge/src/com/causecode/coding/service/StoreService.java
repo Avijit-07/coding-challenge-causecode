@@ -69,6 +69,13 @@ public class StoreService {
 	
 	//Removing a Store Detail
 	public void removeStore(long storeId){
-		stores.remove(storeId);
+		try{
+			if(storeId != 0){
+				dbAccessor.deleteStore((int)storeId);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
